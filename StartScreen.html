@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Giorgos Melas</title>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image:url(mountain3.png) ;
+    }
+
+    li {
+        text-decoration: none;
+        padding: .5rem 1.5rem;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+
+    h2 {
+        padding-left: 1em;
+        font-size: 2em;
+    }
+
+    h3 {
+        float:left;
+        padding-top: 0,5;
+        padding-left: 2em;
+    }
+
+    p {
+        padding-left: 1.7em;
+        padding-top: 2em;
+        float: left;
+        width: 50%;
+        margin: 0 auto;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    img {
+        width: 5em;
+        height: 5em;
+        padding-left: 2em;
+        padding-right: 1.5em;
+        padding-top: 5em;
+    }
+
+    .toolbar {
+        background-color: white;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10%;
+        opacity: 0.8;
+        position: relative;
+    }
+
+    .vertical-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .language-bars {
+        display: flex;
+        flex-direction: column;
+        padding-top: 2em;
+    }
+
+    .overlayul {
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        height: 10%;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+
+    .overlayli {
+        font-size: 2em;
+        display: inline-block;
+        margin: 0 10px;
+        color: black;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 1.5em;
+        background-color: white;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 65%;
+        margin-left: 1.7em;
+        margin-top: 0.5em;
+    }
+
+    .progress-bar-inner {
+        height: 100%;
+        width: 0%;
+        background-color: black;
+        transition: width 0.5s ease-in-out;
+    }
+
+    .image-links {
+        display: flex;
+    }
+
+    .image-caption {
+        text-align: center;
+        font-weight: bold;
+        font-size: 0.87em;
+        padding-left: 0.5em;
+        color: black;
+    }
+
+    .percentage-bar-caption{
+        text-align: start;
+        font-weight: bold;
+        margin-left: 1.7em;
+    }
+
+
+    </style>
+    <script>
+            /*show the different pages*/ 
+
+    function showPage(pageId) {
+        var pages = document.getElementsByClassName('content');
+        for (var i = 0; i < pages.length; i++) {
+        pages[i].style.display = 'none';
+        }
+
+        var selectedPage = document.getElementById(pageId);
+        selectedPage.style.display = 'block';
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+    showPage("home");
+    });
+    
+    function showPage(pageId) {
+    var pages = document.getElementsByClassName("content");
+    for (var i = 0; i < pages.length; i++) {
+        if (pages[i].id === pageId) {
+        pages[i].style.display = "block";
+        } else {
+        pages[i].style.display = "none";
+        }
+    }
+    }
+    /*this shows the back background when i mouse over and click it */
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+    showPage("home");
+    
+    var overlayListItems = document.getElementsByClassName("overlayli");
+    for (var i = 0; i < overlayListItems.length; i++) {
+        overlayListItems[i].addEventListener("mouseover", function() {
+        this.style.backgroundColor = "black";
+        this.style.color = "white";
+        });
+    
+        overlayListItems[i].addEventListener("mouseout", function() {
+        if (!this.classList.contains("active")) {
+            this.style.backgroundColor = "";
+            this.style.color = "";
+        }
+        });
+    
+        overlayListItems[i].addEventListener("click", function() {
+        for (var j = 0; j < overlayListItems.length; j++) {
+            overlayListItems[j].classList.remove("active");
+            overlayListItems[j].style.backgroundColor = "";
+            overlayListItems[j].style.color = "";
+        }
+    
+        this.classList.add("active");
+        this.style.backgroundColor = "black";
+        this.style.color = "white";
+        });
+    }
+    overlayListItems[0].click();
+    });
+
+    //Process bars
+    document.addEventListener("DOMContentLoaded", function(event) {
+    showPage("home");
+
+    var overlayListItems = document.getElementsByClassName("overlayli");
+    for (var i = 0; i < overlayListItems.length; i++) {
+        overlayListItems[i].addEventListener("click", function() {
+        for (var j = 0; j < overlayListItems.length; j++) {
+            overlayListItems[j].classList.remove("active");
+        }
+
+        this.classList.add("active");
+
+        if (this.getAttribute("onclick") === "showPage('about')") {
+            animateProgressBar(75, 2000); // Set the desired percentage and duration here for the first progress bar
+            animateProgressBar2(50, 1500); // Set the desired percentage and duration here for the second progress bar
+            animateProgressBar3(80, 2500); // Set the desired percentage and duration here for the third progress bar
+            animateProgressBar4(60, 1200); // Set the desired percentage and duration here for the fourth progress bar
+            animateProgressBar5(55, 1600);
+            animateProgressBar6(40, 1000);
+            // Add more function calls to animate additional progress bars if needed
+        } else {
+            // Reset the progress bars
+            document.getElementById('progress1').style.width = '0%';
+            document.getElementById('progress2').style.width = '0%';
+            document.getElementById('progress3').style.width = '0%';
+            document.getElementById('progress4').style.width = '0%';
+            document.getElementById('progress5').style.width = '0%';
+            document.getElementById('progress6').style.width = '0%';
+            // Add more lines to reset other progress bars if needed
+        }
+        });
+    }
+    });
+
+    function animateProgressBar(targetWidth, duration) {
+    var progressBar = document.getElementById('progress1');
+    var currentWidth = 0;
+    var increment = targetWidth / (duration / 10); // Divide by 10 to make it smoother
+
+    var interval = setInterval(function() {
+        if (currentWidth >= targetWidth) {
+        clearInterval(interval);
+        } else {
+        currentWidth += increment;
+        progressBar.style.width = currentWidth + '%';
+        }
+    }, 10);
+    }
+
+    function animateProgressBar2(targetWidth, duration) {
+    var progressBar = document.getElementById('progress2');
+    var currentWidth = 0;
+    var increment = targetWidth / (duration / 10); // Divide by 10 to make it smoother
+
+    var interval = setInterval(function() {
+        if (currentWidth >= targetWidth) {
+        clearInterval(interval);
+        } else {
+        currentWidth += increment;
+        progressBar.style.width = currentWidth + '%';
+        }
+    }, 10);
+    }
+
+    function animateProgressBar3(targetWidth, duration) {
+    var progressBar = document.getElementById('progress3');
+    var currentWidth = 0;
+    var increment = targetWidth / (duration / 10); // Divide by 10 to make it smoother
+
+    var interval = setInterval(function() {
+        if (currentWidth >= targetWidth) {
+        clearInterval(interval);
+        } else {
+        currentWidth += increment;
+        progressBar.style.width = currentWidth + '%';
+        }
+    }, 10);
+    }
+
+    function animateProgressBar4(targetWidth, duration) {
+    var progressBar = document.getElementById('progress4');
+    var currentWidth = 0;
+    var increment = targetWidth / (duration / 10); // Divide by 10 to make it smoother
+
+    var interval = setInterval(function() {
+        if (currentWidth >= targetWidth) {
+        clearInterval(interval);
+        } else {
+        currentWidth += increment;
+        progressBar.style.width = currentWidth + '%';
+        }
+    }, 10);
+    }
+
+    function animateProgressBar5(targetWidth, duration) {
+    var progressBar = document.getElementById('progress5');
+    var currentWidth = 0;
+    var increment = targetWidth / (duration / 10); // Divide by 10 to make it smoother
+
+    var interval = setInterval(function() {
+        if (currentWidth >= targetWidth) {
+        clearInterval(interval);
+        } else {
+        currentWidth += increment;
+        progressBar.style.width = currentWidth + '%';
+        }
+    }, 10);
+    }
+
+    function animateProgressBar6(targetWidth, duration) {
+    var progressBar = document.getElementById('progress6');
+    var currentWidth = 0;
+    var increment = targetWidth / (duration / 10); // Divide by 10 to make it smoother
+
+    var interval = setInterval(function() {
+        if (currentWidth >= targetWidth) {
+        clearInterval(interval);
+        } else {
+        currentWidth += increment;
+        progressBar.style.width = currentWidth + '%';
+        }
+    }, 10);
+    }
+
+
+    </script>
+</head>
+<body>
+<div>
+    <!--Toolbar-->
+    <div class="toolbar">
+        <nav>
+            <ul class="overlayul">
+                <li class="overlayli" onclick="showPage('home')">Home</li>
+                <li class="overlayli" onclick="showPage('about')">About</li> 
+                <li class="overlayli" onclick="showPage('projects')">Projects</li>
+               <li class="overlayli" onclick="showPage('contact')">Contact</li>                             
+            </ul>
+        </nav>
+    </div>
+    <!--4 page section-->
+    <div>
+        <!--Home setion-->
+        <div class="content" id="home">
+            <h2>Welcome to Giorgos' personal site.</h2>
+            <p>This is my personal website. In this website you can find some important informations about me. In about section you can get to know me better. In projects section you are able to see some of my work and you can to contact with me in the last section by sending me an email. </p>
+        </div>
+        <!--About section-->
+        <div class="content" id="about">
+            <div class="vertical-container">
+                <div><h2>Learn more about me and my background.</h2></div>        
+                <div><p>My name is George Melas, and I'm a passionate IT student currently studying at the International Hellenic University. Ever since I was born in 2002, I've been fascinated by the world of technology and computers. I consider myself fortunate to have found my passion early on, and that passion is programming.
+                    As a developer, I find joy and fulfillment in crafting elegant solutions to complex problems. Whether it's writing code, designing applications, or delving into the latest technologies, I'm always excited to expand my knowledge and skills in the world of programming.
+                    This website serves as a platform for me to share my experiences, projects, and insights as I continue my journey in the world of IT and software development. In the section below you can see how much I have dealt with each language. </p></div>
+                <div class="language-bars">
+                    <div>
+                        <ul>
+                            <li>
+                                <div><figcaption class="percentage-bar-caption">Java</figcaption></div> 
+                                <div class="progress-bar">
+                                    <div class="progress-bar-inner" id="progress1"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>  
+                    <div>
+                        <ul>
+                            <li>
+                                <div><figcaption class="percentage-bar-caption">Python</figcaption></div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-inner" id="progress2"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <div><figcaption class="percentage-bar-caption">C</figcaption></div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-inner" id="progress3"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <div><figcaption class="percentage-bar-caption">Html</figcaption></div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-inner" id="progress4"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <div><figcaption class="percentage-bar-caption">Css</figcaption></div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-inner" id="progress5"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <div><figcaption class="percentage-bar-caption">Javascript</figcaption></div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-inner" id="progress6"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </div> 
+            </div>
+        </div>
+        <!--Project section-->
+        <div class="content" id="projects">
+            <div class="vertical-container">
+                <div>   
+                    <div><h2>Explore my projects and works.</h2></div>
+                    <div><p>Here is some of my personal projects. I will be really happy if you check them. For more of my work you can find my GitHub page in contact section.</p></div>
+                </div>
+                <div class="image-links">
+                    <div>
+                        <a href="StockChecker.zip" download>
+                            <img src="download.jpg" alt="Image Description">
+                            <figcaption class="image-caption">Android App</figcaption>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Contact section-->
+        <div class="content" id="contact">
+            <div class="vertical-container">
+                <div><h2>Get in touch with me.</h2></div>
+                <div><p>Here are all my social media accounts. You can find me on instagram, facebook and linkedin. I suggest you to take a look to my github page to see more of my work. We can also communicate by sending me an email. </p></div>
+                <div class="image-links">
+                    <div>
+                        <a href="https://www.instagram.com/giorgos__melas/">
+                            <img src="instagram.png" >
+                          </a>
+                    </div>
+                    <div>
+                        <a href="https://www.facebook.com/giorgosserafeim.melas/">
+                            <img src="facebook.png" >
+                          </a>
+                    </div>
+                    <div>
+                        <a href="https://www.linkedin.com/in/giorgos-%CE%BCelas-368990239/">
+                            <img src="linkedin.webp" >
+                          </a>
+                    </div>
+                    <div>
+                        <a href="https://github.com/giorgosmelas2">
+                            <img src="github.png" >
+                          </a>
+                    </div>
+                    <div>
+                        <a href="mailto:giorgosmelas2002@gmail.com">
+                            <img src="mail5.png" >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
